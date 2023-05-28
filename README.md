@@ -2,7 +2,7 @@
 
 This example makes 1 VPC, 2 Private subnets, 2 Public subnets, 1 Server in Public subnet, 1 Login key.
 
-This example doesn't make route table so these subnets use default route tables.
+This example doesn't make route table and something like that,  so some resources use default one.
 
 This example doesn't set server spec, so it depends on default value. When I made this code, that was `c2-g2-h50(vCPU 2EA, Memory 4GB, Disk 50GB)`.
 
