@@ -52,11 +52,22 @@ resource "ncloud_login_key" "my_key" {
   key_name = "my-key"
 }
 
+resource "ncloud_init_script" "my_init" {
+  name    = "set-root-password"
+  // multiline bash init script
+  content = <<-EOF
+    #!/usr/bin/env bash
+
+    echo "root:${var.server_password}" | chpasswd
+    EOF
+}
+
 resource "ncloud_server" "my_server" {
   subnet_no                 = ncloud_subnet.my_public_subnet_01.id
   name                      = "my-public-server"
-  server_image_product_code = "SW.VSVR.OS.LNX64.ROCKY.0806.B050"
+  server_image_product_code = "SW.VSVR.OS.LNX64.ROCKY.0806.B050" // rocky 8
   login_key_name            = ncloud_login_key.my_key.key_name
+  init_script_no            = ncloud_init_script.my_init.id
 }
 
 resource "ncloud_public_ip" "my_public_ip" {
